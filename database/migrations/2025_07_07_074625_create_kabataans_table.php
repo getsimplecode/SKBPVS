@@ -22,16 +22,13 @@ return new class extends Migration
             $table->integer('age');
             $table->enum('gender', ['Male', 'Female']);
 
-            $table->string('motherfullname');
-            $table->string('fatherfullname');
+            $table->enum('work_status',['Employed','Unemployed','Self-Employed','Currently Looking for a job','Not Interested Looking for a job'])->default('Unemployed');
+            $table->enum('education_background',['Elementary Level','Elementary Grad','High School Level','Highschool Grad','Vocational Grad','College Level','College Graduate','Masters Level','Masters Grad','Doctorate Level','Doctorate Graduate'])->default('Elementary Level');
 
             $table->string('purok');
-            $table->string('religion')->nullable();
 
-            $table->boolean('earlypregnancy')->default(false); // true if pregnant or has child
-            $table->string('mstatus')->nullable(); // marital status
-
-            $table->boolean('ismalnourished')->default(false);
+            $table->boolean('earlypregnancy')->default(false);
+            $table->string('mstatus')->nullable();
             $table->timestamps();
         });
     }

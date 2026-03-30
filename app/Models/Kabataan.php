@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Kabataan extends Model
 {
     use HasFactory;
@@ -16,15 +17,17 @@ class Kabataan extends Model
         'suffix',
         'age',
         'gender',
-        'motherfullname',
-        'fatherfullname',
+        'education_background',
+        'work_status',
         'purok',
-        'religion',
         'earlypregnancy',
         'mstatus',
         'ismalnourished',
         'birthdate',
-        'isvoters'
+        'isvoters',
+        'ispwd',
+        'youth_group',
+        'contact'
     ];
 
     public function getFullnameAttribute(){
@@ -33,5 +36,6 @@ class Kabataan extends Model
         ->filter()
         ->join(' ');
     }
+
 
 }

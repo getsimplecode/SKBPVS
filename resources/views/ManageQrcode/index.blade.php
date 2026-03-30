@@ -1,17 +1,8 @@
 @extends('Layouts.mainlayout')
 @section('content')
-    @include('ManageQrcode.addqrcode')
+@include('ManageQrcode.addqrcode')
 
     <div class="container-fluid">
-        <!-- Navbar -->
-        @if (session('error') || session('success'))
-            <div id="alert-message"
-                class="alert alert-{{ session('success') ? 'success' : 'danger' }} alert-dismissible fade show position-fixed top-0 end-0 m-4 shadow"
-                role="alert" style="z-index: 1055; min-width: 300px;">
-                {{ session('error') ?? session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
         <nav class="navbar bg-white shadow rounded mb-1">
             <div class="container-fluid">
                 <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#generateQRModal"><i

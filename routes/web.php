@@ -7,9 +7,8 @@ use App\Http\Controllers\KabataanInformationController;
 use App\Http\Controllers\ManageEventController;
 use App\Http\Controllers\ManageqrcodeController;
 use App\Http\Controllers\ReportController;
-
+use App\Http\Controllers\SkOfficialController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 
 
 Route::get('/', function () {
@@ -27,8 +26,8 @@ Route::controller(KabataanInformationController::class)->group(function(){
     Route::name('kabataaninformation.')->group(function(){
         Route::get('/kabataaninformation','index')->name('index');
         Route::post('/kabataaninformation/store','store')->name('store');
-        Route::put('/kabataaninformation/update/{id}','update')->name('update');
-        Route::delete('/kabataaninformation/destroy/{id}')->name('destroy');
+        Route::put('/kabataaninformation/update/{kabataan}','update')->name('update');
+        Route::delete('/destroy/{id}','destroy')->name('destroy');
         
         Route::get('/kabataanlist','gotokabataanlist')->name('list');
         Route::get('/kabataanstatistics','statistics')->name('statistics');
@@ -63,8 +62,20 @@ Route::controller(AttendanceController::class)->group(function(){
     });
 });
 
+Route::prefix('SkOfficial')
+    ->name('SkOfficial.')
+    ->middleware('auth')
+    ->controller(SkOfficialController::class)
+    ->group(function(){
+        Route::get('/','index')->name('index');
+        Route::post('/store','store')->name('store');
+        Route::put('/update/{id}','update')->name('update');
+    });
+
 Route::get('/Reportsrecords',[ReportController::class, 'index'])->middleware('auth')->name('report.index');
-Route::get('/PrintReport',[ReportController::class, 'gotoprint'])->middleware('auth')->name('report.print');
+Route::get('/pdf', [ReportController::class, 'exportPdf'])->middleware('auth')->name('reports.pdf');
+Route::get('/csv', [ReportController::class, 'exportCsv'])->middleware('auth')->name('reports.csv');
+
 
 //REPORT ROUTES END
 

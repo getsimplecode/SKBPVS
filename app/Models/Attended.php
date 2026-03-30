@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class Attended extends Model
 {
@@ -21,5 +22,13 @@ class Attended extends Model
 
     public function kabataan(){
         return $this->belongsTo(Kabataan::class,'kabataan_id');
+    }
+    protected static function booted(): void
+    {
+        $clear = fn() => Cache::forget('dashboard.stats');
+
+        static::created($clear);
+        static::updated($clear);
+        static::deleted($clear);
     }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
-use App\Models\Attended;
 use Carbon\Carbon;
 
 class ManageEventController extends Controller
@@ -34,7 +33,6 @@ class ManageEventController extends Controller
 
     public function store(Request $request)
     {
-        try{
             $data = $request->validate([
                 'title' => 'required|string|max:250',
                 'date' => 'required|date',
@@ -44,11 +42,7 @@ class ManageEventController extends Controller
             ]);
     
             Event::create($data);
-            return redirect()->route('managevent.index')->with('success','Successfully Added Event.');
-        }catch(Exception $e){
-            Log::error($e->getMessage());
-            return back()->with('error', 'Something went wrong');
-        }
+            return back()->with('success','Successfully Added Event.');
     }
 
 

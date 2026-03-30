@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('qr_codes', function (Blueprint $table) {
-            $table->foreignId('kabataan_id')->constrained()->onDelete('cascade');
+        Schema::table('kabataans', function (Blueprint $table) {
+            $table->enum('youth_group', [
+                'Child Youth',
+                'Core Youth',
+                'Young Adult',
+            ])->after('mstatus');
         });
     }
 
@@ -25,8 +29,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('qr_codes', function (Blueprint $table) {
-            $table->dropForeign(['kabataan_id']);
+        Schema::table('kabataans', function (Blueprint $table) {
+            $table->dropColumn('youth_group');
         });
     }
 };
